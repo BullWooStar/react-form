@@ -2,27 +2,35 @@ import { useState } from "react";
 
 const useForm = (validateValue) => {
   const [enteredValue, setEnteredValue] = useState("");
+  const [valueValid, setValueValid] = useState(null);
+  const [valueFocused, setValueFocused] = useState(null);
 
   const valueChangeHandler = (event) => {
     setEnteredValue(event.target.value);
+    setValueValid(validateValue(enteredValue));
   };
 
-  const valueIsValid = validateValue(enteredValue);
+  const valueFocusHandler = () => {
+    setValueFocused(true);
+  };
 
-  const valueBlurHandler = () => {
-    console.log(enteredValue);
-    console.log(valueIsValid);
+  const valueBlurHandelr = () => {
+    setValueFocused(false);
   };
 
   const reset = () => {
     setEnteredValue("");
+    setValueValid(null);
+    setValueFocused(null);
   };
 
   return {
     value: enteredValue,
-    valid: valueIsValid,
+    valid: valueValid,
+    focused: valueFocused,
     valueChangeHandler,
-    valueBlurHandler,
+    valueFocusHandler,
+    valueBlurHandelr,
     reset,
   };
 };
