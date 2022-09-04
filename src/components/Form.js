@@ -11,7 +11,7 @@ const Form = () => {
     reset: resetEmail,
   } = useForm((value) => {
     const emailReg =
-      /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+      /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/; //일단 내가 알아야함 아니면 주석이라도   // yup 같은거 쓰자
     if (emailReg.test(value)) {
       return true;
     } else {
@@ -29,7 +29,7 @@ const Form = () => {
     reset: resetPassword,
   } = useForm((value) => {
     const passwordReg =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/; // 1차 8자리인가 에러 throw, 2차 뭘 포함하는가 에러 throw 일단 내가 알아야함 아니면 주석이라도
     if (passwordReg.test(value)) {
       return true;
     } else {
@@ -37,7 +37,7 @@ const Form = () => {
     }
   });
 
-  let formIsValid = false;
+  let formIsValid = false; //const로 쓰자 아래 if랑 합치자
 
   if (emailValid && passwordValid) {
     formIsValid = true;
@@ -55,7 +55,7 @@ const Form = () => {
       <div>
         <label>Your Email</label>
         <input
-          type="text"
+          type="text" //email type
           id="email"
           onChange={emailChangeHandler}
           onFocus={emailFocusHandler}
@@ -63,14 +63,14 @@ const Form = () => {
           value={enteredEmail}
         />
         {emailFocused && (
-          <span>{emailValid ? "올바른 형식입니다" : "틀린형식입니다"}</span>
+          <span>{emailValid ? "올바른 형식입니다" : "틀린형식입니다"}</span> //p태그
         )}
       </div>
 
       <div>
         <label>Your Password</label>
         <input
-          type="text"
+          type="text" //password로
           id="password"
           onChange={passwordChangeHandler}
           onFocus={passwordFocusHandler}
