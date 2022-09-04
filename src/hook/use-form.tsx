@@ -1,11 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-const useForm = (validateValue) => {
+const useForm = (validateValue: (enteredValue: string) => boolean) => {
   const [enteredValue, setEnteredValue] = useState("");
-  const [valueValid, setValueValid] = useState(null); //isValueValid 뭐 이렇게
-  const [valueFocused, setValueFocused] = useState(null); //초깃값 false로 두자
+  const [valueValid, setValueValid] = useState(false);
+  const [valueFocused, setValueFocused] = useState(false);
 
-  const valueChangeHandler = (event) => {
+  const valueChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEnteredValue(event.target.value);
     setValueValid(validateValue(enteredValue));
   };
@@ -20,8 +20,8 @@ const useForm = (validateValue) => {
 
   const reset = () => {
     setEnteredValue("");
-    setValueValid(null);
-    setValueFocused(null);
+    setValueValid(false);
+    setValueFocused(false);
   };
 
   return {
@@ -35,4 +35,4 @@ const useForm = (validateValue) => {
   };
 };
 
-export default useForm; //useForm이 아니라 useVali 뭐 이런걸로 바꾸는게 낫지 않을까
+export default useForm;

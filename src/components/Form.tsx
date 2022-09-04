@@ -1,6 +1,7 @@
+import React from "react";
 import useForm from "../hook/use-form";
 
-const Form = () => {
+const Form: React.FC = () => {
   const {
     value: enteredEmail,
     valid: emailValid,
@@ -9,9 +10,9 @@ const Form = () => {
     valueChangeHandler: emailChangeHandler,
     valueBlurHandelr: emailBlurHandler,
     reset: resetEmail,
-  } = useForm((value) => {
+  } = useForm((value: string) => {
     const emailReg =
-      /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/; //일단 내가 알아야함 아니면 주석이라도   // yup 같은거 쓰자
+      /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
     if (emailReg.test(value)) {
       return true;
     } else {
@@ -27,9 +28,9 @@ const Form = () => {
     valueChangeHandler: passwordChangeHandler,
     valueBlurHandelr: passwordBlurHandler,
     reset: resetPassword,
-  } = useForm((value) => {
+  } = useForm((value: string) => {
     const passwordReg =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/; // 1차 8자리인가 에러 throw, 2차 뭘 포함하는가 에러 throw 일단 내가 알아야함 아니면 주석이라도
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
     if (passwordReg.test(value)) {
       return true;
     } else {
@@ -37,13 +38,13 @@ const Form = () => {
     }
   });
 
-  let formIsValid = false; //const로 쓰자 아래 if랑 합치자
+  let formIsValid = false;
 
   if (emailValid && passwordValid) {
     formIsValid = true;
   }
 
-  const formSubmitHandler = (e) => {
+  const formSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(enteredEmail, enteredPassword);
     resetEmail();
@@ -55,7 +56,7 @@ const Form = () => {
       <div>
         <label>Your Email</label>
         <input
-          type="text" //email type
+          type="email"
           id="email"
           onChange={emailChangeHandler}
           onFocus={emailFocusHandler}
@@ -63,14 +64,14 @@ const Form = () => {
           value={enteredEmail}
         />
         {emailFocused && (
-          <span>{emailValid ? "올바른 형식입니다" : "틀린형식입니다"}</span> //p태그
+          <p>{emailValid ? "올바른 형식입니다" : "틀린형식입니다"}</p>
         )}
       </div>
 
       <div>
         <label>Your Password</label>
         <input
-          type="text" //password로
+          type="text"
           id="password"
           onChange={passwordChangeHandler}
           onFocus={passwordFocusHandler}
