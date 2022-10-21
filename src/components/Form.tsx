@@ -1,6 +1,7 @@
+import React from "react";
 import useForm from "../hook/use-form";
 
-const Form = () => {
+const Form: React.FC = () => {
   const {
     value: enteredEmail,
     valid: emailValid,
@@ -9,7 +10,7 @@ const Form = () => {
     valueChangeHandler: emailChangeHandler,
     valueBlurHandelr: emailBlurHandler,
     reset: resetEmail,
-  } = useForm((value) => {
+  } = useForm((value: string) => {
     const emailReg =
       /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
     if (emailReg.test(value)) {
@@ -27,7 +28,7 @@ const Form = () => {
     valueChangeHandler: passwordChangeHandler,
     valueBlurHandelr: passwordBlurHandler,
     reset: resetPassword,
-  } = useForm((value) => {
+  } = useForm((value: string) => {
     const passwordReg =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
     if (passwordReg.test(value)) {
@@ -43,7 +44,7 @@ const Form = () => {
     formIsValid = true;
   }
 
-  const formSubmitHandler = (e) => {
+  const formSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(enteredEmail, enteredPassword);
     resetEmail();
@@ -55,7 +56,7 @@ const Form = () => {
       <div>
         <label>Your Email</label>
         <input
-          type="text"
+          type="email"
           id="email"
           onChange={emailChangeHandler}
           onFocus={emailFocusHandler}
@@ -63,7 +64,7 @@ const Form = () => {
           value={enteredEmail}
         />
         {emailFocused && (
-          <span>{emailValid ? "올바른 형식입니다" : "틀린형식입니다"}</span>
+          <p>{emailValid ? "올바른 형식입니다" : "틀린형식입니다"}</p>
         )}
       </div>
 

@@ -1,11 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-const useForm = (validateValue) => {
+const useForm = (validateValue: (enteredValue: string) => boolean) => {
   const [enteredValue, setEnteredValue] = useState("");
-  const [valueValid, setValueValid] = useState(null);
-  const [valueFocused, setValueFocused] = useState(null);
+  const [valueValid, setValueValid] = useState(false);
+  const [valueFocused, setValueFocused] = useState(false);
 
-  const valueChangeHandler = (event) => {
+  const valueChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEnteredValue(event.target.value);
     setValueValid(validateValue(enteredValue));
   };
@@ -20,8 +20,8 @@ const useForm = (validateValue) => {
 
   const reset = () => {
     setEnteredValue("");
-    setValueValid(null);
-    setValueFocused(null);
+    setValueValid(false);
+    setValueFocused(false);
   };
 
   return {
