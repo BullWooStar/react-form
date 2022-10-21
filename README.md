@@ -15,6 +15,7 @@ REACT에서 form을 다루기 위한 연습 프로젝트입니다.
 
 #### 사용스택
 - react
+- typescript
 
 #### 프로젝트 소개
 
